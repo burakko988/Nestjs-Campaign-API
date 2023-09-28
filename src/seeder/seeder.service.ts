@@ -5,9 +5,7 @@ import { Injectable, OnApplicationBootstrap } from '@nestjs/common';
 
 import { User } from '../user/user.schema';
 import { Order } from '../order/order.schema';
-import { Admin } from '../admin/admin.schema';
 import { UserModule } from '../user/user.module';
-import { AdminModule } from '../admin/admin.module';
 import { OrderModule } from '../order/order.module';
 import { Product } from '../product/product.schema';
 import { Category } from '../category/category.schema';
@@ -25,8 +23,6 @@ export class SeederService implements OnApplicationBootstrap {
         private readonly userModel: Model<UserModule>,
         @InjectModel(Category.name)
         private readonly categoryModule: Model<CategoryModule>,
-        @InjectModel(Admin.name)
-        private readonly adminModule: Model<AdminModule>,
         @InjectModel(Campaign.name)
         private readonly campaignModule: Model<CampaignModule>,
         @InjectModel(Order.name)
@@ -42,11 +38,10 @@ export class SeederService implements OnApplicationBootstrap {
         const countProduct = await this.productModel.countDocuments().exec();
         const countUser = await this.userModel.countDocuments().exec();
         const countCategory = await this.categoryModule.countDocuments().exec();
-        const countAdmin = await this.adminModule.countDocuments().exec();
         const countCampaign = await this.campaignModule.countDocuments().exec();
         const countOrder = await this.orderModule.countDocuments().exec();
 
-        let arr = [countProduct, countUser, countCategory, , countAdmin, countCampaign, countOrder];
+        let arr = [countProduct, countUser, countCategory, , countCampaign, countOrder];
 
         // TODO: Add fs func for created json files...
         const test = {
@@ -62,7 +57,6 @@ export class SeederService implements OnApplicationBootstrap {
             await this.productModel.insertMany(test);
             await this.userModel.insertMany(test);
             await this.categoryModule.insertMany(test);
-            await this.adminModule.insertMany(test);
             await this.campaignModule.insertMany(test);
             await this.orderModule.insertMany(test);
             console.log('Database seeded successfully.');
