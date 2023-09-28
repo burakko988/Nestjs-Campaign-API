@@ -4,6 +4,7 @@ import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 
 import { AppModule } from './app.module';
+import { SeederService } from './seeder/seeder.service';
 import { HttpExceptionFilter } from './common/response-decorator/errorDecorator';
 import { ResponseDecorator } from './common/response-decorator/responseDecorator.interceptor';
 
@@ -12,6 +13,7 @@ async function bootstrap() {
 
     const app = await NestFactory.create(AppModule, { bodyParser: true });
 
+    app.get(SeederService);
     app.enableCors();
     app.useGlobalInterceptors(new ResponseDecorator());
     app.useGlobalFilters(new HttpExceptionFilter());
