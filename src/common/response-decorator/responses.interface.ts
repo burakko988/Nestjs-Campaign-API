@@ -12,7 +12,7 @@ export interface Response {
 export interface ControllerResponse {
     httpStatus?: HttpStatus;
     message?: string;
-    statusCode?: string;
+    statusCode?: number;
     data?: any;
     totalCount?: number;
 }

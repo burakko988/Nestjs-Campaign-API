@@ -29,7 +29,7 @@ export class ResponseDecorator<T> implements NestInterceptor<T, Promise<Response
                 const httpStatus = controllerResponse['statusCode'] || HttpStatus.OK;
 
                 // Init the status
-                const status = Number(httpStatus) >= 200 && Number(httpStatus) < 400 ? 'success' : 'fail';
+                const status = httpStatus >= 200 && httpStatus < 400 ? 'success' : 'fail';
                 let message = controllerResponse.message || 'OK';
 
                 response.statusCode = httpStatus;
