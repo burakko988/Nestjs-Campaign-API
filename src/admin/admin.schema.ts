@@ -8,6 +8,18 @@ export type AdminDoc = Admin & Document;
 export class Admin extends Document {
     @Prop()
     name: string;
+
+    @Prop()
+    surname: string;
+
+    @Prop()
+    email: string;
+
+    @Prop()
+    password: string;
+
+    @Prop()
+    phone: string;
 }
 
 export const AdminSchema = SchemaFactory.createForClass(Admin);

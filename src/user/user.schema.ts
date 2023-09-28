@@ -6,8 +6,20 @@ export type UsertDoc = User & Document;
 
 @Schema({ timestamps: true })
 export class User extends Document {
-    @Prop()
+    @Prop({ required: true })
     name: string;
+
+    @Prop({ required: true })
+    surname: string;
+
+    @Prop({ required: true })
+    password: string;
+
+    @Prop({ required: true })
+    email: string;
+
+    @Prop({ required: true })
+    phone: string;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
