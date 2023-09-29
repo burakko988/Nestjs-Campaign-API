@@ -2,13 +2,14 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 
 import { AdminService } from './admin.service';
+import { AuthModule } from '../auth/auth.module';
 import { AdminController } from './admin.controller';
-import { AuthModule } from 'src/auth/auth.module';
-import { User, UserSchema } from 'src/user/user.schema';
+import { User, UserSchema } from '../user/user.schema';
+import { CategoryModule } from '../category/category.module';
 
 @Module({
     controllers: [AdminController],
     providers: [AdminService],
-    imports: [AuthModule, MongooseModule.forFeature([{ name: User.name, schema: UserSchema }])],
+    imports: [AuthModule, CategoryModule, MongooseModule.forFeature([{ name: User.name, schema: UserSchema }])],
 })
 export class AdminModule {}

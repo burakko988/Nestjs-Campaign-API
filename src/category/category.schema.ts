@@ -7,7 +7,7 @@ export type CategoryDoc = Category & Document;
 @Schema({ timestamps: true })
 export class Category extends Document {
     @Prop()
-    title: string;
+    tittle: string;
 }
 
 export const CategorySchema = SchemaFactory.createForClass(Category);

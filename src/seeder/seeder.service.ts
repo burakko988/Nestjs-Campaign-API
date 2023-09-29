@@ -67,6 +67,7 @@ export class SeederService implements OnApplicationBootstrap {
 
     /**
      *  Call the seed method when the application starts
+     * If dont want to seed db just add to comment on await this.seed()  func.
      */
     async onApplicationBootstrap() {
         await this.seed();
