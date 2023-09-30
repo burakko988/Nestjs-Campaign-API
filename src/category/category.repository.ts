@@ -52,16 +52,22 @@ export class CategoryRepository {
 
     /**
      * Force delete func.
-     * TODO: Add Pagination...
      *
      * @param _id
      * @returns
      */
-    async getCategories() {
+    async getCategories(limit: number, id: string) {
         const filter = {};
-        // Pagination will be added next commit...
-
-        return await this.categoryModel.find(filter).lean().exec();
+        if (id) {
+            const objId = new Types.ObjectId(id);
+            Object.assign(filter, { _id: { $gt: objId } });
+        }
+        return await this.categoryModel
+            .find(filter)
+            .sort({ _id: 1 })
+            .limit(limit ? limit : 10)
+            .lean()
+            .exec();
     }
 
     /**

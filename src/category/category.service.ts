@@ -7,6 +7,7 @@ import { CreateCategoryDto } from './dto/create.category.dto';
 import { UpdateCategoryDto } from './dto/update.category.dto';
 import { ICreateCategoryInput } from './interface/ICreateCategoryInput';
 import { IUpdateCategoryInput } from './interface/IUpdateCategoryInput';
+import { IdPaginationDto } from 'src/common/dto/IdPagination';
 
 @Injectable()
 export class CategoryService {
@@ -107,9 +108,9 @@ export class CategoryService {
      *
      * @returns
      */
-    async getCategories() {
+    async getCategories(limit: number, _id?: string) {
         try {
-            return await this.categoryRepository.getCategories();
+            return await this.categoryRepository.getCategories(limit, _id);
         } catch (e) {
             if (e.status && e.status != 500) {
                 throw e;
