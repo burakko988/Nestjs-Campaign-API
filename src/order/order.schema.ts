@@ -9,20 +9,39 @@ export interface IBoughtItems {
     quantity: number;
 }
 
+export interface IBillPricing {
+    shippingPrice: number;
+    totalPrice: number;
+    dicountedPrice: number;
+}
+
 @Schema({ timestamps: true })
 export class Order extends Document {
     @Prop({
         type: [
             {
                 _id: { type: Types.ObjectId },
+                tittle: { type: String },
+                author: { type: String },
+                category: { type: String },
+                price: { type: Number },
                 quantity: { type: Number },
             },
         ],
     })
     boughtItems: IBoughtItems[];
 
+    @Prop({
+        type: {
+            shippingPrice: { type: Number },
+            totalPrice: { type: Number },
+            dicountedPrice: { type: Number },
+        },
+    })
+    billPricing: IBillPricing;
+
     /**
-     * new Types.ObjectId('000000000000000000000000') means is no more campaign
+     * new Types.ObjectId('000000000000000000000000') means is no campaign
      */
     @Prop({
         type: Types.ObjectId,
@@ -33,11 +52,8 @@ export class Order extends Document {
     })
     campaign: string;
 
-    @Prop()
-    price: string;
-
-    @Prop()
-    buyer: string;
+    @Prop({ type: Types.ObjectId, ref: 'User' })
+    buyer: Types.ObjectId;
 }
 
 export const OrderSchema = SchemaFactory.createForClass(Order);
