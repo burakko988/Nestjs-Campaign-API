@@ -1,4 +1,6 @@
 import { Model } from 'mongoose';
+import * as fs from 'fs';
+import * as path from 'path';
 
 import { InjectModel } from '@nestjs/mongoose';
 import { Injectable, OnApplicationBootstrap } from '@nestjs/common';
@@ -41,24 +43,27 @@ export class SeederService implements OnApplicationBootstrap {
         const countCampaign = await this.campaignModule.countDocuments().exec();
         const countOrder = await this.orderModule.countDocuments().exec();
 
-        let arr = [countProduct, countUser, countCategory, , countCampaign, countOrder];
+        const arr = [countProduct, countUser, countCategory, countCampaign, countOrder];
 
-        // TODO: Add fs func for created json files...
-        const test = {
-            _id: '621207869d310f7b42d627c5',
-            name: 'burak',
-        };
-
-        // Check if all collections are empty
         const isEmptyDb = arr.every((q) => q === 0);
-
-        // Insert sample data into each collection if the database is empty
         if (isEmptyDb) {
-            await this.productModel.insertMany(test);
-            await this.userModel.insertMany(test);
-            await this.categoryModule.insertMany(test);
-            await this.campaignModule.insertMany(test);
-            await this.orderModule.insertMany(test);
+            let variables = ['product', 'user', 'category', 'campaign', 'order'];
+            const data = {};
+
+            const ROOT_DIR = __dirname.replace(/dist.+/, '');
+            for (let i = 0; i < variables.length; i++) {
+                const variable = variables[i];
+                const filePath = path.join(ROOT_DIR, 'src', 'seeder', `${variable}.seeder.json`);
+                data[variable] = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+            }
+            // Check if all collections are empty
+
+            // Insert sample data into each collection if the database is empty
+            await this.productModel.insertMany(data['product']);
+            await this.userModel.insertMany(data['user']);
+            await this.categoryModule.insertMany(data['category']);
+            await this.campaignModule.insertMany(data['campaign']);
+            await this.orderModule.insertMany(data['order']);
             console.log('Database seeded successfully.');
         } else {
             console.log('Database already contains data. Skipping seeding.');

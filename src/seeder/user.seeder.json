@@ -1,6 +1,20 @@
 [
     {
-        "_id":"621207869d310f7b42d627c5",
-        "name":"burak"
+        "name": "burak",
+        "surname": "korkmaz",
+        "password": "$2b$10$93D4MdbF5whQeNnqm2KSDu0rOaTxPwy54/UtpzLC7jcBL0jRzrs3a",
+        "email": "admin@hotmail.com",
+        "phone": "1111111111",
+        "roles": "ADMIN",
+        "_id": "65189de11ca3496613627449"
+    },
+    {
+        "name": "burak",
+        "surname": "korkmaz",
+        "password": "$2b$10$d4dO5m3ekNkMoncLcjk36.3KvPqNx5qnR/HIt6oLzzMBUdsJIHhqu",
+        "email": "user@hotmail.com",
+        "phone": "1111111111",
+        "roles": "USER",
+        "_id": "65189e151ca349661362744d"
     }
 ]
