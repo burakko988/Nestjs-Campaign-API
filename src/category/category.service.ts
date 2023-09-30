@@ -14,6 +14,27 @@ export class CategoryService {
     constructor(private readonly categoryRepository: CategoryRepository) {}
 
     /**
+     * Check the category is exists.
+     *
+     * @param _id
+     * @returns
+     */
+    async categoryExists(_id: Types.ObjectId) {
+        try {
+            const dbResult = await this.categoryRepository.categoryExist(_id);
+            if (dbResult) {
+                return true;
+            }
+            throw new NotFoundException('CATEGORY_DID_NOT_FOUND');
+        } catch (e) {
+            if (e.status && e.status != 500) {
+                throw e;
+            }
+            throw new InternalServerErrorException(e.message || e);
+        }
+    }
+
+    /**
      * Create Func.
      *
      * @param dto

@@ -85,4 +85,17 @@ export class CategoryRepository {
         // If we wanna show updated date should use findOneAndUpdate and 1 more variable options = {new:true}
         return await this.categoryModel.updateOne(filter, update).lean().exec();
     }
+
+    /**
+     * Check the category exist.
+     *
+     * @param _id
+     * @returns
+     */
+    async categoryExist(_id: Types.ObjectId): Promise<Boolean> {
+        const filter = { _id };
+        const result = await this.categoryModel.exists(filter).lean().exec();
+
+        return result ? true : false;
+    }
 }

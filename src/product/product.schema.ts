@@ -4,18 +4,20 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 export type ProductDoc = Product & Document;
 
+// Timestamps:true logic when new data created default add createdAt and updatedAt it will use
+// some func.
 @Schema({ timestamps: true })
 export class Product extends Document {
-    @Prop({ required: true })
-    title: string;
+    @Prop()
+    tittle: string;
 
-    @Prop({ required: true })
+    @Prop()
     listPrice: number;
 
-    @Prop({ required: true })
+    @Prop()
     stockQuantity: number;
 
-    @Prop({ required: true })
+    @Prop()
     author: string;
 
     @Prop({ type: Types.ObjectId, ref: 'Category' })
