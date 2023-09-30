@@ -6,6 +6,10 @@ export type OrderDoc = Order & Document;
 
 export interface IBoughtItems {
     _id: Types.ObjectId;
+    tittle: string;
+    author: string;
+    category: string;
+    price: number;
     quantity: number;
 }
 
