@@ -4,5 +4,5 @@ export class UpdateCategoryDto {
     @IsString()
     @IsNotEmpty()
     @IsDefined()
-    tittle: string;
+    title: string;
 }

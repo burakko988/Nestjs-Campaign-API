@@ -75,10 +75,10 @@ export class ProductRepository {
      */
     async getProduct(_id: Types.ObjectId) {
         const filter = { _id };
-        const projection = { _id: 1, author: 1, price: 1, tittle: 1, stockQuantity: 1 };
+        const projection = { _id: 1, author: 1, price: 1, title: 1, stockQuantity: 1 };
         const populate = {
             path: 'category',
-            select: { tittle: 1 },
+            select: { title: 1 },
         };
 
         return await this.productModel.findOne(filter, projection).populate(populate).lean().exec();
@@ -96,10 +96,10 @@ export class ProductRepository {
         // {stockQuantity:{$lte:10}} // this query get stockQuantity 10 lower than equal  products.
         // or {author:{$eq:variable)}} variable = authorName $eq get the same author name or $ne get the without variable author.
         const filter = {};
-        const projection = { _id: 1, author: 1, price: 1, tittle: 1, stockQuantity: 1 };
+        const projection = { _id: 1, author: 1, price: 1, title: 1, stockQuantity: 1 };
         const populate = {
             path: 'category',
-            select: { tittle: 1 },
+            select: { title: 1 },
         };
         if (id) {
             const objId = new Types.ObjectId(id);

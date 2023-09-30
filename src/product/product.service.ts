@@ -45,7 +45,7 @@ export class ProductService {
      */
     async createProduct(dto: CreateProductDto) {
         try {
-            const { tittle, author, category, listPrice, stockQuantity } = dto;
+            const { title, author, category, listPrice, stockQuantity } = dto;
 
             const objId = new Types.ObjectId(category);
 
@@ -53,7 +53,7 @@ export class ProductService {
             await this.categoryService.categoryExists(objId);
 
             const input: ICrateProductInput = {
-                tittle,
+                title,
                 author,
                 listPrice,
                 stockQuantity,
@@ -81,7 +81,7 @@ export class ProductService {
             const objId = new Types.ObjectId(_id);
             await this.productExists(objId);
 
-            const { tittle, author, category, listPrice, stockQuantity } = dto;
+            const { title, author, category, listPrice, stockQuantity } = dto;
 
             let categoryObjId;
 
@@ -91,7 +91,7 @@ export class ProductService {
             }
 
             const input: IUpdateProductInput = {
-                tittle,
+                title,
                 author,
                 listPrice,
                 stockQuantity,

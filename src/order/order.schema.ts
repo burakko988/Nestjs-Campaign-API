@@ -6,7 +6,7 @@ export type OrderDoc = Order & Document;
 
 export interface IBoughtItems {
     _id: Types.ObjectId;
-    tittle: string;
+    title: string;
     author: string;
     category: string;
     price: number;
@@ -25,7 +25,7 @@ export class Order extends Document {
         type: [
             {
                 _id: { type: Types.ObjectId },
-                tittle: { type: String },
+                title: { type: String },
                 author: { type: String },
                 category: { type: String },
                 price: { type: Number },

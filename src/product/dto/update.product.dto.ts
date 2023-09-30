@@ -4,7 +4,7 @@ export class UpdateProductDto {
     @IsOptional()
     @IsDefined()
     @IsString()
-    tittle: string;
+    title: string;
 
     @IsOptional()
     @IsDefined()

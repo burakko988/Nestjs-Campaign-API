@@ -1,7 +1,7 @@
 import { Types } from 'mongoose';
 
 export interface ICrateProductInput {
-    tittle: string;
+    title: string;
     author: string;
     category: Types.ObjectId;
     listPrice: number;

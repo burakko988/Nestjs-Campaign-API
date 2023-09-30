@@ -9,7 +9,7 @@ export type ProductDoc = Product & Document;
 @Schema({ timestamps: true })
 export class Product extends Document {
     @Prop()
-    tittle: string;
+    title: string;
 
     @Prop()
     listPrice: number;

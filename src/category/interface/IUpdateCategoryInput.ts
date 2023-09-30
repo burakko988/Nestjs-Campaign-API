@@ -1,3 +1,3 @@
 export interface IUpdateCategoryInput {
-    tittle: string;
+    title: string;
 }

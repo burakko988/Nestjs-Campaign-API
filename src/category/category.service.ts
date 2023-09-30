@@ -43,7 +43,7 @@ export class CategoryService {
     async createCategory(dto: CreateCategoryDto) {
         try {
             const input: ICreateCategoryInput = {
-                tittle: dto.tittle,
+                title: dto.title,
             };
 
             return await this.categoryRepository.createCategory(input);
@@ -89,7 +89,7 @@ export class CategoryService {
         try {
             const objId = new Types.ObjectId(_id);
 
-            const update: IUpdateCategoryInput = { tittle: dto.tittle };
+            const update: IUpdateCategoryInput = { title: dto.title };
 
             const dbResult = await this.categoryRepository.updateCategory(objId, update);
             // dbResult.matchedCount mean is the id exist or not

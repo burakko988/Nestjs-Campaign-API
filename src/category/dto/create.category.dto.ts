@@ -4,5 +4,5 @@ export class CreateCategoryDto {
     @IsString()
     @IsNotEmpty()
     @IsDefined()
-    tittle: string;
+    title: string;
 }

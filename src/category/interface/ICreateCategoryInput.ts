@@ -1,3 +1,3 @@
 export interface ICreateCategoryInput {
-    tittle: string;
+    title: string;
 }
