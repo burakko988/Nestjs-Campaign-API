@@ -1,6 +1,6 @@
 import { Types } from 'mongoose';
 
-import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 
 import { ProductRepository } from './product.repository';
 import { CreateProductDto } from './dto/create.product.dto';
@@ -8,6 +8,7 @@ import { UpdateProductDto } from './dto/update.product.dto';
 import { CategoryService } from '../category/category.service';
 import { ICrateProductInput } from './interface/ICreateProductInput';
 import { IUpdateProductInput } from './interface/IUpdateProductInput';
+import { ICheckBasketInput } from '../order/interface/ICheckBasketInput';
 
 @Injectable()
 export class ProductService {
@@ -83,10 +84,10 @@ export class ProductService {
 
             const { title, author, category, listPrice, stockQuantity } = dto;
 
-            let categoryObjId;
+            const categoryObjId = new Types.ObjectId(category);
 
+            // check dto category exists or undefined.
             if (category) {
-                categoryObjId = new Types.ObjectId(category);
                 await this.categoryService.categoryExists(categoryObjId);
             }
 
@@ -153,12 +154,49 @@ export class ProductService {
      * @param inc
      * @returns
      */
-    async decreaseProductStock(_id: string, inc: number) {
+    async decreaseProductStock(checkBasketInput: ICheckBasketInput[]) {
         try {
-            const objId = new Types.ObjectId(_id);
-            return await this.productRepository.decreaseProductQuantity(objId, inc);
+            return await this.productRepository.decreaseProductQuantity(checkBasketInput);
         } catch (e) {
             if (e.status && e.status != 500) {
+                throw e;
+            }
+            throw new InternalServerErrorException(e.message || e);
+        }
+    }
+
+    /**
+     * This function actually not a best practice cause i want to try something different :)
+     * Used js function for filtered and checked.
+     *
+     * Best Practice = create basketSchema and create new API as addProduct and automaticly check...
+     *
+     *
+     * @param _id
+     * @param inc
+     * @returns
+     */
+    async getBasketItemsAndCheck(checkBasketInput: ICheckBasketInput[]): Promise<void> {
+        try {
+            // get the ids
+            const inputIds = checkBasketInput.map((q) => q._id);
+            // this func used for product exist and needed data as stock
+            const basketItems = await this.productRepository.checkProducts(inputIds);
+            // this if check the basket items exist on product collection.
+            if (basketItems.length !== inputIds.length) {
+                throw new NotFoundException('PRODUCT_DID_NOT_FOUND');
+            }
+            // Filter the available items
+            const availableItems = checkBasketInput.filter((item1) => {
+                const matchingItem = basketItems.find((item2) => item2._id.equals(item1._id));
+                return matchingItem && matchingItem.stockQuantity - item1.quantity >= 0;
+            });
+            // if input and filteredOutput equal return true or give an error
+            if (availableItems.length !== checkBasketInput.length) {
+                throw new BadRequestException('STOCK_NOT_ENOUGH');
+            }
+        } catch (e) {
+            if (e.status && e.status !== 500) {
                 throw e;
             }
             throw new InternalServerErrorException(e.message || e);

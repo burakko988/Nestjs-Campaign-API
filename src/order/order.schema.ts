@@ -4,7 +4,9 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 export type OrderDoc = Order & Document;
 
-export interface IBoughtItems {
+// Can be create basket schema and added func is addProduct
+// more easy than check stock but i'll pass
+export interface IBasketItems {
     _id: Types.ObjectId;
     title: string;
     author: string;
@@ -15,7 +17,8 @@ export interface IBoughtItems {
 
 export interface IBillPricing {
     shippingPrice: number;
-    totalPrice: number;
+    withoutDiscountPrice: number;
+    discountPrice: number;
     dicountedPrice: number;
 }
 
@@ -33,12 +36,13 @@ export class Order extends Document {
             },
         ],
     })
-    boughtItems: IBoughtItems[];
+    basketItems: IBasketItems[];
 
     @Prop({
         type: {
             shippingPrice: { type: Number },
-            totalPrice: { type: Number },
+            withoutDiscountPrice: { type: Number },
+            discountPrice: { type: Number },
             dicountedPrice: { type: Number },
         },
     })
@@ -51,10 +55,10 @@ export class Order extends Document {
         type: Types.ObjectId,
         ref: 'Campaign',
         default(): Types.ObjectId {
-            return new Types.ObjectId('000000000000000000000000');
+            return null;
         },
     })
-    campaign: string;
+    campaign: Types.ObjectId;
 
     @Prop({ type: Types.ObjectId, ref: 'User' })
     buyer: Types.ObjectId;

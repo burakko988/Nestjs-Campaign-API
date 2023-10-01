@@ -6,6 +6,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Product, ProductDoc } from './product.schema';
 import { ICrateProductInput } from './interface/ICreateProductInput';
 import { IUpdateProductInput } from './interface/IUpdateProductInput';
+import { ICheckBasketInput } from '../order/interface/ICheckBasketInput';
 
 @Injectable()
 export class ProductRepository {
@@ -61,10 +62,17 @@ export class ProductRepository {
      * @param inc
      * @returns
      */
-    async decreaseProductQuantity(_id: Types.ObjectId, inc: number) {
-        const filter = { _id };
-        const update = { $inc: { stockQuantity: -Math.abs(inc) } };
-        return await this.productModel.updateOne(filter, update);
+    async decreaseProductQuantity(checkBasketInput: ICheckBasketInput[]) {
+        // const filter = { _id };
+        // const update = { $inc: { stockQuantity: -Math.abs(inc) } };
+        const bulkOps = checkBasketInput.map((item) => ({
+            updateOne: {
+                filter: { _id: item._id },
+                update: { $inc: { stockQuantity: -Math.abs(item.quantity) } },
+            },
+        }));
+
+        await this.productModel.bulkWrite(bulkOps, { ordered: false });
     }
 
     /**
@@ -112,6 +120,17 @@ export class ProductRepository {
             .limit(limit ? limit : 25)
             .lean()
             .exec();
+    }
+
+    /**
+     *
+     * @param input
+     * @returns
+     */
+    async checkProducts(input: Types.ObjectId[]) {
+        const filter = { _id: { $in: input } };
+        const projection = { _id: 1, stockQuantity: 1 };
+        return await this.productModel.find(filter, projection);
     }
 
     //---------------------------------------------------------------------------/

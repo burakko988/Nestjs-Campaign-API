@@ -7,8 +7,8 @@ import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from
 
 import { Role } from '../common/enum/role.enum';
 import { User, UserDoc } from '../user/user.schema';
-import { ROLES_KEY } from '../common/decorator/roles.decorator';
 import { IUserRequest } from './interface/IUserRequest';
+import { ROLES_KEY } from '../common/decorator/roles.decorator';
 
 @Injectable()
 export class RolesGuard implements CanActivate {
@@ -36,7 +36,7 @@ export class RolesGuard implements CanActivate {
 
                 const profile = await this.getUserRoles(objectId);
 
-                request.user = { profile };
+                request.user = profile;
                 /**
                  * Checking endpoint if roles need return false.
                  */
