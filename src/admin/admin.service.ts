@@ -1,17 +1,20 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 
 import { CategoryService } from '../category/category.service';
-import { CreateCategoryDto } from '../category/dto/create.category.dto';
+import { CampaignService } from '../campaign/campaign.service';
+import { ProductService } from '../product/product.service';
+import { UpdateProductDto } from '../product/dto/update.product.dto';
+import { CreateProductDto } from '../product/dto/create.product.dto';
 import { UpdateCategoryDto } from '../category/dto/update.category.dto';
-import { ProductService } from 'src/product/product.service';
-import { CreateProductDto } from 'src/product/dto/create.product.dto';
-import { UpdateProductDto } from 'src/product/dto/update.product.dto';
+import { CreateCategoryDto } from '../category/dto/create.category.dto';
+import { CreateCampaignDto } from '../campaign/dto/create.campaign.dto';
 
 @Injectable()
 export class AdminService {
     constructor(
         private readonly categoryService: CategoryService,
         private readonly productService: ProductService,
+        private readonly campaignService: CampaignService,
     ) {}
 
     /**
@@ -94,6 +97,23 @@ export class AdminService {
     async adminUpdateProduct(_id: string, dto: UpdateProductDto) {
         try {
             return await this.productService.updateProduct(_id, dto);
+        } catch (e) {
+            if (e.status && e.status != 500) {
+                throw e;
+            }
+            throw new InternalServerErrorException(e.message || e);
+        }
+    }
+
+    /**
+     * For admin func.
+     *
+     * @param dto
+     * @returns
+     */
+    async adminCreateCampaign(dto: CreateCampaignDto) {
+        try {
+            return await this.campaignService.createCampaign(dto);
         } catch (e) {
             if (e.status && e.status != 500) {
                 throw e;

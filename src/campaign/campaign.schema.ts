@@ -50,10 +50,14 @@ export class Campaign extends Document {
     })
     campaignRules: ICampaignRules;
 
-    @Prop({ enum: BenefitType })
+    @Prop({ enum: BenefitType, default: 'FIXED' })
     benefitType: BenefitType;
 
-    @Prop()
+    @Prop({
+        default(): any {
+            return 0;
+        },
+    })
     discountNumber: number;
 }
 

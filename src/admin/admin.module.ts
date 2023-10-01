@@ -7,10 +7,11 @@ import { AdminController } from './admin.controller';
 import { User, UserSchema } from '../user/user.schema';
 import { ProductModule } from '../product/product.module';
 import { CategoryModule } from '../category/category.module';
+import { CampaignModule } from 'src/campaign/campaign.module';
 
 @Module({
     controllers: [AdminController],
     providers: [AdminService],
-    imports: [AuthModule, CategoryModule, ProductModule, MongooseModule.forFeature([{ name: User.name, schema: UserSchema }])],
+    imports: [AuthModule, CategoryModule, CampaignModule, ProductModule, MongooseModule.forFeature([{ name: User.name, schema: UserSchema }])],
 })
 export class AdminModule {}

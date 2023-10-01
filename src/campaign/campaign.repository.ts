@@ -11,4 +11,14 @@ export class CampaignRepository {
         @InjectModel(Campaign.name)
         private readonly campaignModel: Model<CampaignDoc>,
     ) {}
+
+    /**
+     * Create campaign
+     *
+     * @param input
+     * @returns
+     */
+    async createCampaign(input) {
+        return await new this.campaignModel(input).save();
+    }
 }

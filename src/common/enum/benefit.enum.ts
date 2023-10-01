@@ -1,5 +1,5 @@
 export enum BenefitType {
-    DISCOUNT = 'DISCOUNT',
+    PERCANTAGE = 'PERCENTAGE',
     FIXED = 'FIXED',
 }
 // Fixed if the selected campaign 2 buy 1 pay this is fixed type

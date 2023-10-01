@@ -9,6 +9,7 @@ import { CreateProductDto } from '../product/dto/create.product.dto';
 import { UpdateProductDto } from '../product/dto/update.product.dto';
 import { CreateCategoryDto } from '../category/dto/create.category.dto';
 import { UpdateCategoryDto } from '../category/dto/update.category.dto';
+import { CreateCampaignDto } from 'src/campaign/dto/create.campaign.dto';
 
 @UseGuards(RolesGuard)
 @Controller('admin')
@@ -57,6 +58,17 @@ export class AdminController {
     async updateProduct(@Param() p: MongoIdParam, @Body() dto: UpdateProductDto) {
         const data = await this.adminService.adminUpdateProduct(p.id, dto);
         const response = { statusCode: 200, message: `SUCCESS`, data: data };
+        return response;
+    }
+    //---------------------------------------------------------------------------/
+    //------------------------------CAMPAIGN API'S-------------------------------/
+    //---------------------------------------------------------------------------/
+
+    @Roles(Role.ADMIN)
+    @Post('/create-campaign')
+    async createCampaign(@Body() dto: CreateCampaignDto) {
+        const data = await this.adminService.adminCreateCampaign(dto);
+        const response = { statusCode: 201, message: `CREATED`, data: data };
         return response;
     }
 }
