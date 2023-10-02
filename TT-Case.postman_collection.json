@@ -1,0 +1,627 @@
+{
+	"info": {
+		"_postman_id": "94e40505-a058-4165-9d84-6004d6b4903b",
+		"name": "TT-Case",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20609511"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": []
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Get Product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/product/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"product",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "65183f0b9c1861aaa712a346"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Products",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/product?limit=2&id=621207869d310f7b42d627c5",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"product"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "2"
+								},
+								{
+									"key": "id",
+									"value": "621207869d310f7b42d627c5"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Create Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"Kişisel Gelişim\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/admin/create-category",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"create-category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/admin/delete-category/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"delete-category",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "65174b6378974046df262034",
+									"description": "Enter here Category Id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"felsefe\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/admin/update-category/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"update-category",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "65174b9bdcb71bf1920008a1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"Denemeler - Hasan Ali Yücel Klasikleri\",\r\n    \"author\":\"Michel de Montaigne\",\r\n    \"category\":\"651a216e7e666752f12760c3\",\r\n    \"listPrice\":24,\r\n    \"stockQuantity\":4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/admin/create-product",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"create-product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"category\":\"6518464d583c6695d5b89c00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/admin/update-product/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"update-product",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "65183f0b9c1861aaa712a345"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Campaign",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"campaignTitle\":\"1 ALANA 1 BEDAVA\",\r\n    \"discountNumber\":0,\r\n    \"benefitType\":\"FIXED\",\r\n    \"campaignType\":\"BUY_ONE_GET_ONE\",\r\n    \"campaignRules\":{\r\n        \"author\":\"Sabahattin Ali\",\r\n        \"category\":\"651a21c57e666752f12760c6\"\r\n        // \"minBasketPrice\":100\r\n    }\r\n}\r\n // Campaign Types = Enum Types = MIN_PRICE - BUY_ONE_GET_ONE\r\n // Benefit Types = Enum Types = FIXED - DISCOUNT\r\n // campaignRules explanation = all values is optional if all values empty will be give any order\r\n // if selected minBasektPrice select just gte orderPrice will be discounted...\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/admin/create-campaign",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"create-campaign"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"burak\",\r\n    \"surname\":\"korkmaz\",\r\n    \"email\":\"user@hotmail.com\",\r\n    \"phone\":\"1111111111\",\r\n    \"password\":\"bkbk\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "ADMIN",
+									"description": "This is Optional Query if is empty default value = USER",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"user@hotmail.com\",\r\n    \"password\":\"bkbk\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh Token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"refreshToken\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImthcmltYmFAZ21haWwuY29tIiwiaWQiOiI2NTE1ZGJiYzcxYjg1NjcxNDBiODQxYjgiLCJpc1JlZnJlc2giOnRydWUsImlhdCI6MTY5NTkzMTMzOSwiZXhwIjoxNjk2MDE3NzM5fQ.fHUveMCPwfTQUWPpWFcRu9ne4CdSS6RZruTdn_Ge1EI\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/refresh",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Campaign",
+			"item": []
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "Create Order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"basketItems\":[\r\n        {\r\n        \"_id\":\"651a22a07e666752f12760d9\",\r\n        \"title\":\"İnce Memed\",\r\n        \"category\":\"651a21c57e666752f12760c6\",\r\n        \"author\":\"Yaşar Kemal\",\r\n        \"price\":\"48.75\",\r\n        \"quantity\":4\r\n    },\r\n   {\r\n        \"_id\":\"651a23097e666752f12760e1\",\r\n        \"title\":\"Kürk Mantolu Madonna\",\r\n        \"category\":\"651a21c57e666752f12760c6\",\r\n        \"author\":\"Sabahattin Ali\",\r\n        \"price\":\"9.1\",\r\n        \"quantity\":1\r\n    },\r\n    {\r\n        \"_id\":\"651a242e7e666752f12760f5\",\r\n        \"title\":\"Kuyucaklı Yusuf\",\r\n        \"category\":\"651a21c57e666752f12760c6\",\r\n        \"author\":\"Sabahattin Ali\",\r\n        \"price\":\"10.4\",\r\n        \"quantity\":1\r\n    }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/order/create",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"order",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Orders",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/order",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"order"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "20",
+									"disabled": true
+								},
+								{
+									"key": "id",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/order/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"order",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "6519ca83c3a79ba63a529436"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "Get Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/category/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"category",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "",
+									"description": "Must need to enter category id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Categories",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/category?limit=1&id=65174b9bdcb71bf1920008aa",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"category"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "1"
+								},
+								{
+									"key": "id",
+									"value": "65174b9bdcb71bf1920008aa"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
