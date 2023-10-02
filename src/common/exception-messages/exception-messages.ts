@@ -17,3 +17,5 @@ const authExceptions = {
 const orderExceptions = {
     OrderNotFound: 'ORDER_DID_NOT_FOUND',
 };
+
+export { userExceptions, productExceptions, categoryExceptions, authExceptions, orderExceptions };

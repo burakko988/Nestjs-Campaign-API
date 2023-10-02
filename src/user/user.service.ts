@@ -5,6 +5,7 @@ import { Injectable, InternalServerErrorException, BadRequestException } from '@
 import { UserRepository } from './user.repository';
 import { UserRegisterDto } from './dto/user.register.dto';
 import { ICreateUserInput } from './interface/ICreateUserInput';
+import { userExceptions } from 'src/common/exception-messages/exception-messages';
 
 @Injectable()
 export class UserService {

@@ -7,6 +7,7 @@ import { CreateCategoryDto } from './dto/create.category.dto';
 import { UpdateCategoryDto } from './dto/update.category.dto';
 import { ICreateCategoryInput } from './interface/ICreateCategoryInput';
 import { IUpdateCategoryInput } from './interface/IUpdateCategoryInput';
+import { categoryExceptions } from 'src/common/exception-messages/exception-messages';
 
 @Injectable()
 export class CategoryService {

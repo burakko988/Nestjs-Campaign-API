@@ -9,6 +9,7 @@ import { CategoryService } from '../category/category.service';
 import { ICrateProductInput } from './interface/ICreateProductInput';
 import { IUpdateProductInput } from './interface/IUpdateProductInput';
 import { ICheckBasketInput } from '../order/interface/ICheckBasketInput';
+import { productExceptions } from 'src/common/exception-messages/exception-messages';
 
 @Injectable()
 export class ProductService {

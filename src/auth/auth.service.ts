@@ -7,6 +7,7 @@ import { Injectable, InternalServerErrorException, UnauthorizedException, BadReq
 import { LoginDto } from './dto/login.dto';
 import { UserService } from '../user/user.service';
 import { UserRegisterDto } from '../user/dto/user.register.dto';
+import { authExceptions } from 'src/common/exception-messages/exception-messages';
 
 @Injectable()
 export class AuthService {
