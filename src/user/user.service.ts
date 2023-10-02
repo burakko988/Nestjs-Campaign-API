@@ -1,6 +1,6 @@
 import * as bcrypt from 'bcrypt';
 
-import { Injectable, InternalServerErrorException, BadRequestException, UnauthorizedException } from '@nestjs/common';
+import { Injectable, InternalServerErrorException, BadRequestException } from '@nestjs/common';
 
 import { UserRepository } from './user.repository';
 import { UserRegisterDto } from './dto/user.register.dto';
@@ -25,7 +25,7 @@ export class UserService {
                 create.password = await bcrypt.hash(password, 10);
                 return await this.userRepository.registerUser(create);
             }
-            throw new BadRequestException('USER_ALREADY_EXIST');
+            throw new BadRequestException(userExceptions.UserAlreadyExist);
         } catch (e) {
             if (e.status && e.status != 500) {
                 throw e;

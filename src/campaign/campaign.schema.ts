@@ -10,7 +10,6 @@ export type CampaignDoc = Campaign & Document;
 export interface ICampaignRules {
     author?: string;
     category?: Types.ObjectId;
-    buyXGetYNumber?: Number;
     minBasketPrice?: number;
 }
 /**
@@ -46,7 +45,6 @@ export class Campaign extends Document {
         type: {
             author: String,
             category: Types.ObjectId,
-            buyXGetYNumber: Number,
             minBasketPrice: Number,
         },
     })

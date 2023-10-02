@@ -28,7 +28,7 @@ export class ProductService {
             const exist = await this.productRepository.productExists(_id);
 
             if (!exist) {
-                throw new NotFoundException('PRODUCT_DID_NOT_FOUND');
+                throw new NotFoundException(productExceptions.ProductNotFound);
             }
             return true;
         } catch (e) {
@@ -38,6 +38,7 @@ export class ProductService {
             throw new InternalServerErrorException(e.message || e);
         }
     }
+
     /**
      * Create product.
      *
@@ -184,7 +185,7 @@ export class ProductService {
             const basketItems = await this.productRepository.checkProducts(inputIds);
             // this if check the basket items exist on product collection.
             if (basketItems.length !== inputIds.length) {
-                throw new NotFoundException('PRODUCT_DID_NOT_FOUND');
+                throw new NotFoundException(productExceptions.ProductNotFound);
             }
             // Filter the available items
             const availableItems = checkBasketInput.filter((item1) => {
@@ -193,7 +194,7 @@ export class ProductService {
             });
             // if input and filteredOutput equal return true or give an error
             if (availableItems.length !== checkBasketInput.length) {
-                throw new BadRequestException('STOCK_NOT_ENOUGH');
+                throw new BadRequestException(productExceptions.StockNotEnough);
             }
         } catch (e) {
             if (e.status && e.status !== 500) {

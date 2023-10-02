@@ -15,10 +15,5 @@ export class CampaignRulesDto {
     @IsOptional()
     @IsDefined()
     @IsNumber()
-    buyXGetYNumber: number;
-
-    @IsOptional()
-    @IsDefined()
-    @IsNumber()
     minBasketPrice: number;
 }

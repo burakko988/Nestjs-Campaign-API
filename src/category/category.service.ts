@@ -7,7 +7,6 @@ import { CreateCategoryDto } from './dto/create.category.dto';
 import { UpdateCategoryDto } from './dto/update.category.dto';
 import { ICreateCategoryInput } from './interface/ICreateCategoryInput';
 import { IUpdateCategoryInput } from './interface/IUpdateCategoryInput';
-import { IdPaginationDto } from 'src/common/dto/IdPagination';
 
 @Injectable()
 export class CategoryService {
@@ -25,7 +24,7 @@ export class CategoryService {
             if (dbResult) {
                 return true;
             }
-            throw new NotFoundException('CATEGORY_DID_NOT_FOUND');
+            throw new NotFoundException(categoryExceptions.CategoryNotFound);
         } catch (e) {
             if (e.status && e.status != 500) {
                 throw e;
@@ -69,7 +68,7 @@ export class CategoryService {
             if (dbResult.deletedCount === 1) {
                 return true;
             }
-            throw new NotFoundException('CATEGORY_DID_NOT_FOUND');
+            throw new NotFoundException(categoryExceptions.CategoryNotFound);
         } catch (e) {
             if (e.status && e.status != 500) {
                 throw e;
@@ -96,7 +95,7 @@ export class CategoryService {
             if (dbResult.matchedCount === 1) {
                 return dbResult.modifiedCount === 1 ? true : false;
             }
-            throw new NotFoundException('CATEGORY_DID_NOT_FOUND');
+            throw new NotFoundException(categoryExceptions.CategoryNotFound);
         } catch (e) {
             if (e.status && e.status != 500) {
                 throw e;

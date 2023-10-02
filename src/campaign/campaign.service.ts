@@ -32,8 +32,6 @@ export class CampaignService {
                 campaignRules: {
                     author: campaignType === CampaignType.MIN_PRICE ? undefined : campaignRules.author,
                     category: campaignType === CampaignType.MIN_PRICE ? undefined : campaignRules.category,
-                    // Here if selected campaign BUY_ONE_GET_ONE and undefined set default number else not need too.
-                    buyXGetYNumber: campaignType === CampaignType.BUY_ONE_GET_ONE && undefined ? 2 : undefined,
                     minBasketPrice: campaignRules.minBasketPrice,
                 },
             };
@@ -120,41 +118,48 @@ export class CampaignService {
      * @returns
      */
     async getMaxBenefitOnBuyOneGetOne(basketItems: IBasketItems[]): Promise<IMaxBenefitOuput> {
-        const campaigns = await this.buyOneGetOneCampaigns(basketItems);
-        if (!Array.isArray(campaigns) || !campaigns.length) {
-            return { campaignId: new Types.ObjectId('000000000000000000000000'), discountValue: 0 };
-        }
-
-        let maxPriceCampaign = null;
-        let maxPrice = 0;
-
-        for (const campaign of campaigns) {
-            if (!campaign || !campaign.campaignRules) {
-                continue;
+        try {
+            const campaigns = await this.buyOneGetOneCampaigns(basketItems);
+            if (!Array.isArray(campaigns) || !campaigns.length) {
+                return { campaignId: new Types.ObjectId('000000000000000000000000'), discountValue: 0 };
             }
 
-            const author = campaign.campaignRules.author;
-            const category = campaign.campaignRules.category;
+            let maxPriceCampaign = null;
+            let maxPrice = 0;
 
-            let filteredBooks = [];
+            for (const campaign of campaigns) {
+                if (!campaign || !campaign.campaignRules) {
+                    continue;
+                }
 
-            if (author && category) {
-                filteredBooks = basketItems.filter((item) => item.author === author && item.category === category.toHexString());
-            } else if (author) {
-                filteredBooks = basketItems.filter((item) => item.author === author);
-            } else if (category) {
-                filteredBooks = basketItems.filter((item) => item.category === category.toHexString());
-            }
+                const author = campaign.campaignRules.author;
+                const category = campaign.campaignRules.category;
 
-            if (filteredBooks.length > 0) {
-                const maxPriceInFilteredBooks = Math.max(...filteredBooks.map((book) => book.price));
-                if (maxPriceInFilteredBooks > maxPrice) {
-                    maxPrice = maxPriceInFilteredBooks;
-                    maxPriceCampaign = { campaignId: campaign._id, discountValue: maxPrice };
+                let filteredBooks = [];
+
+                if (author && category) {
+                    filteredBooks = basketItems.filter((item) => item.author === author && item.category === category.toHexString());
+                } else if (author) {
+                    filteredBooks = basketItems.filter((item) => item.author === author);
+                } else if (category) {
+                    filteredBooks = basketItems.filter((item) => item.category === category.toHexString());
+                }
+
+                if (filteredBooks.length > 0) {
+                    const maxPriceInFilteredBooks = Math.max(...filteredBooks.map((book) => book.price));
+                    if (maxPriceInFilteredBooks > maxPrice) {
+                        maxPrice = maxPriceInFilteredBooks;
+                        maxPriceCampaign = { campaignId: campaign._id, discountValue: maxPrice };
+                    }
                 }
             }
+            return maxPriceCampaign;
+        } catch (e) {
+            if (e.status && e.status != 500) {
+                throw e;
+            }
+            throw new InternalServerErrorException(e.message || e);
         }
-        return maxPriceCampaign;
     }
 
     /**
@@ -164,49 +169,56 @@ export class CampaignService {
      * @returns
      */
     private async buyOneGetOneCampaigns(basketItems: IBasketItems[]) {
-        const authorCountMap = new Map<string, number>();
-        const categoryCountMap = new Map<string, number>();
+        try {
+            const authorCountMap = new Map<string, number>();
+            const categoryCountMap = new Map<string, number>();
 
-        basketItems.forEach((item) => {
-            const { author, category, quantity } = item;
+            basketItems.forEach((item) => {
+                const { author, category, quantity } = item;
 
-            if (!authorCountMap.has(author)) {
-                authorCountMap.set(author, 0);
+                if (!authorCountMap.has(author)) {
+                    authorCountMap.set(author, 0);
+                }
+                if (!categoryCountMap.has(category)) {
+                    categoryCountMap.set(category, 0);
+                }
+
+                authorCountMap.set(author, authorCountMap.get(author) + quantity);
+                categoryCountMap.set(category, categoryCountMap.get(category) + quantity);
+            });
+
+            let hasSameCategoryAndAuthor = false;
+            const sameCategory = [];
+            const sameAuthor = [];
+
+            for (const item of basketItems) {
+                const { author, category } = item;
+
+                if (authorCountMap.get(author) >= 2) {
+                    sameAuthor.push(author);
+                }
+
+                if (categoryCountMap.get(category) >= 2) {
+                    sameCategory.push(category);
+                }
+
+                if (authorCountMap.get(author) >= 2 && categoryCountMap.get(category) >= 2) {
+                    hasSameCategoryAndAuthor = true;
+                }
             }
-            if (!categoryCountMap.has(category)) {
-                categoryCountMap.set(category, 0);
+            const nonDuplicateCategory = [...new Set(sameCategory)];
+            const nonDuplicateAuthor = [...new Set(sameAuthor)];
+
+            const dbResponse = await this.campaignRepository.buyOneGetOneCampaigns(hasSameCategoryAndAuthor, nonDuplicateAuthor, nonDuplicateCategory);
+
+            const mergedData = dbResponse.both.concat(dbResponse.singleAuthor).concat(dbResponse.singleCategory);
+
+            return mergedData;
+        } catch (e) {
+            if (e.status && e.status != 500) {
+                throw e;
             }
-
-            authorCountMap.set(author, authorCountMap.get(author) + quantity);
-            categoryCountMap.set(category, categoryCountMap.get(category) + quantity);
-        });
-
-        let hasSameCategoryAndAuthor = false;
-        const sameCategory = [];
-        const sameAuthor = [];
-
-        for (const item of basketItems) {
-            const { author, category } = item;
-
-            if (authorCountMap.get(author) >= 2) {
-                sameAuthor.push(author);
-            }
-
-            if (categoryCountMap.get(category) >= 2) {
-                sameCategory.push(category);
-            }
-
-            if (authorCountMap.get(author) >= 2 && categoryCountMap.get(category) >= 2) {
-                hasSameCategoryAndAuthor = true;
-            }
+            throw new InternalServerErrorException(e.message || e);
         }
-        const nonDuplicateCategory = [...new Set(sameCategory)];
-        const nonDuplicateAuthor = [...new Set(sameAuthor)];
-
-        const dbResponse = await this.campaignRepository.buyOneGetOneCampaigns(hasSameCategoryAndAuthor, nonDuplicateAuthor, nonDuplicateCategory);
-
-        const mergedData = dbResponse.both.concat(dbResponse.singleAuthor).concat(dbResponse.singleCategory);
-
-        return mergedData;
     }
 }

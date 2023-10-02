@@ -74,7 +74,7 @@ export class OrderService {
             const objId = new Types.ObjectId(_id);
             const response = await this.orderRepository.getSingleOrder(objId, user._id);
             if (!response) {
-                throw new NotFoundException('ORDER_DID_NOT_FOUND');
+                throw new NotFoundException(orderExceptions.OrderNotFound);
             }
             return response;
         } catch (e) {

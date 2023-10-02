@@ -38,9 +38,9 @@ export class AuthService {
                     const tokens = await this.getTokens(payload);
                     return tokens;
                 }
-                throw new UnauthorizedException('WRONG_PASSWORD');
+                throw new UnauthorizedException(authExceptions.WrongPassword);
             }
-            throw new UnauthorizedException('EMAIL_DO_NOT_CORRECT');
+            throw new UnauthorizedException(authExceptions.EmailNotCorrect);
         } catch (e) {
             if (e.status && e.status != 500) {
                 throw e;
@@ -62,7 +62,7 @@ export class AuthService {
             if (!userExist) {
                 return await this.userService.userRegister(userRegisterDto, roles);
             }
-            throw new BadRequestException('EMAIL_ALREADY_USED');
+            throw new BadRequestException(authExceptions.EmailAlreadyExists);
         } catch (e) {
             if (e.status && e.status != 500) {
                 throw e;
@@ -104,9 +104,9 @@ export class AuthService {
                 const payload = { email: verifiedToken.email, id: verifiedToken.id };
                 return await this.getTokens(payload);
             }
-            throw new BadRequestException('INVALIDKEE_REFRESH_TOKEN');
+            throw new BadRequestException(authExceptions.InvalidRefreshToken);
         } catch (e) {
-            throw new UnauthorizedException('INVALID_REFRESH_TOKEN');
+            throw new UnauthorizedException(authExceptions.InvalidRefreshToken);
         }
     }
 

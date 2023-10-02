@@ -1,10 +1,10 @@
 import { Controller, UseGuards, Get, Param, Query } from '@nestjs/common';
 
-import { CategoryService } from './category.service';
 import { RolesGuard } from '../auth/roles.guard';
-import { Roles } from '../common/decorator/roles.decorator';
 import { Role } from '../common/enum/role.enum';
+import { CategoryService } from './category.service';
 import { MongoIdParam } from '../common/dto/MongoIdParam';
+import { Roles } from '../common/decorator/roles.decorator';
 import { IdPaginationDto } from 'src/common/dto/IdPagination';
 @UseGuards(RolesGuard)
 @Controller('category')

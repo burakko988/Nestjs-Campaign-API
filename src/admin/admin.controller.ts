@@ -9,7 +9,7 @@ import { CreateProductDto } from '../product/dto/create.product.dto';
 import { UpdateProductDto } from '../product/dto/update.product.dto';
 import { CreateCategoryDto } from '../category/dto/create.category.dto';
 import { UpdateCategoryDto } from '../category/dto/update.category.dto';
-import { CreateCampaignDto } from 'src/campaign/dto/create.campaign.dto';
+import { CreateCampaignDto } from '../campaign/dto/create.campaign.dto';
 
 @UseGuards(RolesGuard)
 @Controller('admin')

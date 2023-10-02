@@ -7,7 +7,7 @@ import { AdminController } from './admin.controller';
 import { User, UserSchema } from '../user/user.schema';
 import { ProductModule } from '../product/product.module';
 import { CategoryModule } from '../category/category.module';
-import { CampaignModule } from 'src/campaign/campaign.module';
+import { CampaignModule } from '../campaign/campaign.module';
 
 @Module({
     controllers: [AdminController],
