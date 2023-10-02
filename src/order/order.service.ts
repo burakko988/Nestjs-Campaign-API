@@ -9,12 +9,14 @@ import { ProductService } from 'src/product/product.service';
 import { IUserRequest } from 'src/auth/interface/IUserRequest';
 import { ICreateOrderInput } from './interface/ICreateOrderInput';
 import { ICheckBasketInput } from './interface/ICheckBasketInput';
+import { CampaignService } from 'src/campaign/campaign.service';
 
 @Injectable()
 export class OrderService {
     constructor(
         private readonly orderRepository: OrderRepository,
         private readonly productService: ProductService,
+        private readonly campaignService: CampaignService,
     ) {}
 
     /**
@@ -33,18 +35,21 @@ export class OrderService {
             await this.productService.getBasketItemsAndCheck(dto.basketItems);
 
             const basketTotalPrice = this.calculateBasketPrice(dto.basketItems);
+
+            const bestCampaign = await this.campaignService.getAvaibleCampagins(dto.basketItems, basketTotalPrice);
+
             // billPricing added later than campaign methods when is ready...
             // campaign added later than campaign methods when is ready...
             // NOW is test data is added...
             const input: ICreateOrderInput = {
                 basketItems: dto.basketItems,
                 buyer,
-                campaign: new Types.ObjectId('000000000000000000000000'),
+                campaign: bestCampaign.campaignId ? bestCampaign.campaignId : new Types.ObjectId('000000000000000000000000'),
                 billPricing: {
-                    shippingPrice: 1,
-                    dicountedPrice: 1,
-                    discountPrice: 1,
+                    dicountedPrice: basketTotalPrice - bestCampaign.discountValue,
+                    discountPrice: bestCampaign.discountValue,
                     withoutDiscountPrice: basketTotalPrice,
+                    shippingPrice: basketTotalPrice - bestCampaign.discountValue < 150 ? 35 : 0,
                 },
             };
             await this.productService.decreaseProductStock(checkBasketInput);

@@ -1,6 +1,178 @@
 [
     {
-        "_id":"621207869d310f7b42d627c5",
-        "name":"burak,hahu"
+        "_id": "651a22a07e666752f12760d9",
+        "title": "İnce Memed",
+        "listPrice": 48.75,
+        "stockQuantity": 10,
+        "author": "Yaşar Kemal",
+        "category": "651a21c57e666752f12760c6",
+        "createdAt": "2023-10-02T01:53:36.412Z",
+        "updatedAt": "2023-10-02T01:53:36.412Z",
+        "__v": 0
+    },
+    {
+        "title": "Tutunamayanlar",
+        "listPrice": 90.3,
+        "stockQuantity": 20,
+        "author": "Oğuz Atay",
+        "category": "651a21c57e666752f12760c6",
+        "_id": "651a22e07e666752f12760dd",
+        "createdAt": "2023-10-02T01:54:40.852Z",
+        "updatedAt": "2023-10-02T01:54:40.852Z",
+        "__v": 0
+    },
+    {
+        "title": "Kürk Mantolu Madonna",
+        "listPrice": 9.1,
+        "stockQuantity": 4,
+        "author": "Sabahattin Ali",
+        "category": "651a21c57e666752f12760c6",
+        "_id": "651a23097e666752f12760e1",
+        "createdAt": "2023-10-02T01:55:21.177Z",
+        "updatedAt": "2023-10-02T01:55:21.177Z",
+        "__v": 0
+    },
+    {
+        "title": "Fareler ve İnsanlar",
+        "listPrice": 35.75,
+        "stockQuantity": 8,
+        "author": "John Steinback",
+        "category": "651a21c57e666752f12760c6",
+        "_id": "651a23307e666752f12760e5",
+        "createdAt": "2023-10-02T01:56:00.853Z",
+        "updatedAt": "2023-10-02T01:56:00.853Z",
+        "__v": 0
+    },
+    {
+        "title": "Şeker Portakalı",
+        "listPrice": 33,
+        "stockQuantity": 1,
+        "author": "Jose Mauro De Vasconcelos",
+        "category": "651a21c57e666752f12760c6",
+        "_id": "651a23597e666752f12760e9",
+        "createdAt": "2023-10-02T01:56:41.579Z",
+        "updatedAt": "2023-10-02T01:56:41.579Z",
+        "__v": 0
+    },
+    {
+        "title": "Sen Yola Çık Yol Sana Görünür",
+        "listPrice": 28.5,
+        "stockQuantity": 7,
+        "author": "Hakan Mengüç",
+        "category": "651a22477e666752f12760d5",
+        "_id": "651a238c7e666752f12760ed",
+        "createdAt": "2023-10-02T01:57:32.622Z",
+        "updatedAt": "2023-10-02T01:57:32.622Z",
+        "__v": 0
+    },
+    {
+        "title": "Kara Delikler",
+        "listPrice": 39,
+        "stockQuantity": 2,
+        "author": "Stephen Hawking",
+        "category": "651a21e47e666752f12760cc",
+        "_id": "651a23de7e666752f12760f1",
+        "createdAt": "2023-10-02T01:58:54.900Z",
+        "updatedAt": "2023-10-02T01:58:54.900Z",
+        "__v": 0
+    },
+    {
+        "title": "Kuyucaklı Yusuf",
+        "listPrice": 10.4,
+        "stockQuantity": 2,
+        "author": "Sabahattin Ali",
+        "category": "651a21c57e666752f12760c6",
+        "_id": "651a242e7e666752f12760f5",
+        "createdAt": "2023-10-02T02:00:14.243Z",
+        "updatedAt": "2023-10-02T02:00:14.243Z",
+        "__v": 0
+    },
+    {
+        "title": "Animal Farm",
+        "listPrice": 17.5,
+        "stockQuantity": 1,
+        "author": "George Orwell",
+        "category": "651a21c57e666752f12760c6",
+        "_id": "651a245a7e666752f12760f9",
+        "createdAt": "2023-10-02T02:00:58.699Z",
+        "updatedAt": "2023-10-02T02:00:58.699Z",
+        "__v": 0
+    },
+    {
+        "title": "Dokuzuncu Hariciye Koğuşu",
+        "listPrice": 18.5,
+        "stockQuantity": 0,
+        "author": "Peyami Safa",
+        "category": "651a21c57e666752f12760c6",
+        "_id": "651a247a7e666752f12760fd",
+        "createdAt": "2023-10-02T02:01:30.826Z",
+        "updatedAt": "2023-10-02T02:01:30.826Z",
+        "__v": 0
+    },
+    {
+        "title": "Allah De Ötesini Bırak",
+        "listPrice": 39.6,
+        "stockQuantity": 18,
+        "author": "Uğur Koşar",
+        "category": "651a221d7e666752f12760d2",
+        "_id": "651a24b27e666752f1276101",
+        "createdAt": "2023-10-02T02:02:26.038Z",
+        "updatedAt": "2023-10-02T02:02:26.038Z",
+        "__v": 0
+    },{
+        "title": "Aşk 5 Vakittir",
+        "listPrice": 42,
+        "stockQuantity": 9,
+        "author": "Mehmet Yıldız",
+        "category": "651a221d7e666752f12760d2",
+        "_id": "651a24d77e666752f1276105",
+        "createdAt": "2023-10-02T02:03:03.560Z",
+        "updatedAt": "2023-10-02T02:03:03.560Z",
+        "__v": 0
+    },
+    {
+        "title": "Benim Zürafam Uçabilir",
+        "listPrice": 27.3,
+        "stockQuantity": 12,
+        "author": "Mert Arık",
+        "category": "651a22027e666752f12760cf",
+        "_id": "651a25067e666752f1276109",
+        "createdAt": "2023-10-02T02:03:50.085Z",
+        "updatedAt": "2023-10-02T02:03:50.085Z",
+        "__v": 0
+    },
+    {
+        "title": "Kamyon - Seçme Öyküler",
+        "listPrice": 9.75,
+        "stockQuantity": 9,
+        "author": "Sabahattin Ali",
+        "category": "651a21d47e666752f12760c9",
+        "_id": "651a25577e666752f1276111",
+        "createdAt": "2023-10-02T02:05:11.810Z",
+        "updatedAt": "2023-10-02T02:05:11.810Z",
+        "__v": 0
+    },
+    {
+        "title": "Kendime Düşünceler",
+        "listPrice": 14.4,
+        "stockQuantity": 1,
+        "author": "Marcus Aurelius",
+        "category": "651a216e7e666752f12760c3",
+        "_id": "651a25917e666752f1276115",
+        "createdAt": "2023-10-02T02:06:09.143Z",
+        "updatedAt": "2023-10-02T02:06:09.143Z",
+        "__v": 0
+    },
+    {
+        "title": "Denemeler - Hasan Ali Yücel Klasikleri",
+        "listPrice": 24,
+        "stockQuantity": 4,
+        "author": "Michel de Montaigne",
+        "category": "651a216e7e666752f12760c3",
+        "_id": "651a25b67e666752f1276119",
+        "createdAt": "2023-10-02T02:06:46.852Z",
+        "updatedAt": "2023-10-02T02:06:46.852Z",
+        "__v": 0
     }
+
 ]

@@ -1,4 +1,3 @@
-import { Types } from 'mongoose';
 import { BenefitType } from '../../common/enum/benefit.enum';
 import { CampaignType } from '../../common/enum/campaign.type.enum';
 import { ICampaignRules } from '../campaign.schema';
